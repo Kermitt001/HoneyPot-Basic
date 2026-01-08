@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  honeypot:
+    build: .
+    ports:
+      - "2222:2222"
+    volumes:
+      - ./data:/app/data
+      - ./honeypot.db:/app/honeypot.db
+      - ./events.jsonl:/app/events.jsonl
+    environment:
+      - SSH_PORT=2222
+    networks:
+      - honeynet
+
+networks:
+  honeynet:
+    driver: bridge
